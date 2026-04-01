@@ -1,0 +1,32 @@
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+public class NewInputListenerClass : MonoBehaviour
+{
+    // Input
+    private InputSystem_Actions _inputActions;
+    private InputActionMap _TEMPLATE_Actions;
+    private InputAction _DESIRED_ACTION;
+
+    private void Awake()
+    {
+        _inputActions = ControlsManager.Instance.InputActions;
+        _TEMPLATE_Actions = _inputActions.Player;
+        _DESIRED_ACTION = _TEMPLATE_Actions.FindAction("DESIRED NAME", true);
+    }
+
+    private void OnEnable()
+    {
+        _DESIRED_ACTION.performed += ctx => ON_ACTION();
+    }
+
+    private void ON_ACTION()
+    {
+
+    }
+
+    private void OnDisable()
+    {
+        _DESIRED_ACTION.performed -= ctx => ON_ACTION();
+    }
+}
